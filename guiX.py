@@ -9,6 +9,7 @@ from Buscador import indemnizacion_despido_prueba
 today = date.today()
 
 root = tk.Tk()
+root['bg']= "#ffffff"
 root.iconbitmap("iconoaplicacionblanco.ico")
 root.resizable(width=False, height=False)
 root.title("Selección de Modelos de Recargo de Prestaciones")
@@ -16,7 +17,7 @@ root.title("Selección de Modelos de Recargo de Prestaciones")
 # Crear una elección de Modelo
 tk.Label(root, text="Elige modelo:", font=('Arial', 12, "bold"),
          justify=tk.CENTER,
-         padx=20).grid(row=2, column=0)
+         padx=20, background="#ffffff").grid(row=2, column=0)
 # Crear botones para elegir modelo.
 modelo = 1
 
@@ -65,6 +66,7 @@ def mostrarrecargocondena():
     label4.grid(row=8, column=0, pady=4)
     entry4.grid(row=8, column=2, pady=4)
     entry5.grid(row=9, column=2, pady=4)
+    label5.grid(row=9, column=0, pady=4)
     label15.grid(row=10, column=0, pady=4)
     entry15.grid(row=10, column=2, pady=4)
     label6.grid(row=11, column=0, pady=4)
@@ -405,114 +407,114 @@ def check_cbox(event):
 
 
 cbox = ttk.Combobox(root, values=["Fuerza Mayor", "Fortuito"], width=17)
-cboxlabel = ttk.Label(root, text="Fundamento de estimatoria")
+cboxlabel = ttk.Label(root, text="Fundamento de estimatoria", background="#ffffff")
 cbox.bind("<<ComboboxSelected>>", check_cbox)
 
 # Espacio en blanco.
-labelx = ttk.Label(root, text=" ").grid(row=4, column=0)
+labelx = ttk.Label(root, text=" ", background="#ffffff").grid(row=4, column=0)
 
 # Crear caja de texto 2, nombre del actor.
 entry_var2 = tk.StringVar()
 entry2 = ttk.Entry(root, textvariable=entry_var2, justify=tk.CENTER)
-label2 = ttk.Label(root, text="Nombre del actor")
+label2 = ttk.Label(root, text="Nombre del actor", background="#ffffff")
 
 # Crear caja de texto 3, nombre del demandado.
 entry_var3 = tk.StringVar()
 entry3 = ttk.Entry(root, textvariable=entry_var3, justify=tk.CENTER)
-label3 = ttk.Label(root, text="Nombre del demandado")
+label3 = ttk.Label(root, text="Nombre del demandado", background="#ffffff")
 
 # Crear caja de fecha 4, fecha de acta.
 entry_var4 = tk.StringVar()
 entry4 = DateEntry(root, textvariable=entry_var4, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
-label4 = ttk.Label(root, text="Fecha del Acta de Infracción")
+label4 = ttk.Label(root, text="Fecha del Acta de Infracción", background="#ffffff")
 
 # Crear caja de fecha 5, fecha resolucion impugnada.
 entry_var5 = tk.StringVar()
 entry5 = DateEntry(root, textvariable=entry_var5, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
-label5 = ttk.Label(root, text="Fecha de la Resolución impugnada")
+label5 = ttk.Label(root, text="Fecha de la Resolución impugnada", background="#ffffff")
 
 # Crear caja de texto 15, porcentaje impuesto por la Inspección.
 entry_var15 = tk.StringVar()
 entry15 = ttk.Entry(root, textvariable=entry_var15, justify=tk.CENTER)
-label15 = ttk.Label(root, text="Porcentaje impuesto por la Inspección")
+label15 = ttk.Label(root, text="Porcentaje impuesto por la Inspección", background="#ffffff")
 
 # Crear caja de texto 6, artículos infringidos.
 entry_var6 = tk.StringVar()
 entry6 = ttk.Entry(root, textvariable=entry_var6, justify=tk.CENTER)
-label6 = ttk.Label(root, text="Artículos infringidos según acta de Infracción")
+label6 = ttk.Label(root, text="Artículos infringidos según acta de Infracción", background="#ffffff")
 
 # Crear caja de fecha 7, fecha de la reclamación previa.
 entry_var7 = tk.StringVar()
 entry7 = DateEntry(root, textvariable=entry_var7, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
-label7 = ttk.Label(root, text="Fecha de la Reclamación Previa")
+label7 = ttk.Label(root, text="Fecha de la Reclamación Previa", background="#ffffff")
 
 # Crear caja de fecha 8, fecha de la resolución de la reclamación previa.
 entry_var8 = tk.StringVar()
 entry8 = DateEntry(root, textvariable=entry_var8, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
-label8 = ttk.Label(root, text="Fecha de Resolución de la Reclamación Previa")
+label8 = ttk.Label(root, text="Fecha de Resolución de la Reclamación Previa", background="#ffffff")
 
 # Crear caja de texto 9, pruena practicada.
 entry_var9 = tk.StringVar()
 entry9 = ttk.Entry(root, textvariable=entry_var9, justify=tk.CENTER)
-label9 = ttk.Label(root, text="Prueba practicada aparte de la documental")
+label9 = ttk.Label(root, text="Prueba practicada aparte de la documental", background="#ffffff")
 
 # Crear caja de texto 10, en el presente caso.
 entry_var10 = tk.StringVar()
 entry10 = ttk.Entry(root, textvariable=entry_var10, justify=tk.CENTER)
-label10 = ttk.Label(root, text="En el presente caso...")
+label10 = ttk.Label(root, text="En el presente caso...", background="#ffffff")
 
 # Crear caja de texto 10, nombre del demandado.
 entry_var13 = tk.StringVar()
 entry13 = ttk.Entry(root, textvariable=entry_var13, justify=tk.CENTER)
-label13 = ttk.Label(root, text="Porcentaje que se estima adecuado")
+label13 = ttk.Label(root, text="Porcentaje que se estima adecuado", background="#ffffff")
 # Posicionar la caja 10 en la ventana, nombre del demandado.
 
 # Crear caja de texto 10, nombre del demandado.
 entry_var14 = tk.StringVar()
 entry14 = ttk.Entry(root, textvariable=entry_var14, justify=tk.CENTER)
-label14 = ttk.Label(root, text="Justificación del porcentaje que se impone")
+label14 = ttk.Label(root, text="Justificación del porcentaje que se impone", background="#ffffff")
 # Posicionar la caja 10 en la ventana, nombre del demandado.
 
 # Crear caja de texto 11, numero del procedimiento.
 entry_var11 = tk.StringVar()
 entry11 = ttk.Entry(root, textvariable=entry_var11, justify=tk.CENTER)
-label11 = ttk.Label(root, text="Número del procedimiento")
+label11 = ttk.Label(root, text="Número del procedimiento", background="#ffffff")
 
 # Crear caja de texto 12, año del procedimiento.
 entry_var12 = tk.StringVar()
 entry12 = ttk.Entry(root, textvariable=entry_var12, justify=tk.CENTER)
-label12 = ttk.Label(root, text="Año")
+label12 = ttk.Label(root, text="Año", background="#ffffff")
 
 # Crear caja de fecha 4, fecha de acta.
 entry_var20 = tk.StringVar()
 entry20 = ttk.Entry(root, textvariable=entry_var20, justify=tk.CENTER)
-label20 = ttk.Label(root, text="Actividad de la Empresa")
+label20 = ttk.Label(root, text="Actividad de la Empresa", background="#ffffff")
 
 # Crear caja de fecha 5, fecha resolucion impugnada.
 entry_var21 = tk.StringVar()
 entry21 = DateEntry(root, textvariable=entry_var21, date_pattern='dd/mm/Y', width=17, background='gray',
                     foreground='white', borderwidth=1)
-label21 = ttk.Label(root, text="Antigüedad")
+label21 = ttk.Label(root, text="Antigüedad", background="#ffffff")
 
 # Crear caja de texto 15, porcentaje impuesto por la Inspección.
 entry_var22 = tk.StringVar()
 entry22 = ttk.Entry(root, textvariable=entry_var22, justify=tk.CENTER)
-label22 = ttk.Label(root, text="Categoría Profesional")
+label22 = ttk.Label(root, text="Categoría Profesional", background="#ffffff")
 
 # Crear caja de texto 6, artículos infringidos.
 entry_var23 = tk.StringVar()
 entry23 = ttk.Entry(root, textvariable=entry_var23, justify=tk.CENTER)
-label23 = ttk.Label(root, text="Salario diario")
+label23 = ttk.Label(root, text="Salario diario", background="#ffffff")
 
 # Crear caja de fecha 7, fecha de la reclamación previa.
 entry_var24 = tk.StringVar()
 entry24 = DateEntry(root, textvariable=entry_var24, date_pattern='dd/mm/Y', width=17, background='gray',
                     foreground='white', borderwidth=1)
-label24 = ttk.Label(root, text="Fecha celebración SEMAC")
+label24 = ttk.Label(root, text="Fecha celebración SEMAC", background="#ffffff")
 
 avenenciaoefecto = None
 
@@ -526,13 +528,13 @@ def check_cbox(event):
 
 
 opt2 = ttk.Combobox(root, values=["Sin avenencia", "Sin efecto"], width=17)
-optlabel2 = ttk.Label(root, text="Resultado del SEMAC")
+optlabel2 = ttk.Label(root, text="Resultado del SEMAC", background="#ffffff")
 opt2.bind("<<ComboboxSelected>>", check_cbox)
 
 # Crear caja de texto 10, nombre del demandado.
 entry_var27 = tk.StringVar()
 entry27 = ttk.Entry(root, textvariable=entry_var27, justify=tk.CENTER)
-label27 = ttk.Label(root, text="Desde cuando no cobra")
+label27 = ttk.Label(root, text="Desde cuando no cobra", background="#ffffff")
 # Posicionar la caja 10 en la ventana, nombre del demandado.
 
 # Posicionar boton de fin
