@@ -128,7 +128,7 @@ def indemnizacion_despido_datos(fecha_antiguedad, salari, fecha_despido):
 def indemnizacion_despido_prueba(fecha_antiguedad, salari, fecha_despido):
     from datetime import datetime, timedelta
     fechalimite = datetime.strptime('12/02/2012', '%d/%m/%Y').date()
-    antig = datetime.strptime(fecha_antiguedad, '%m/%d/%y').date()
+    antig = datetime.strptime(fecha_antiguedad, '%d/%m/%Y').date()
     despid = datetime.strptime(fecha_despido, '%Y-%m-%d').date()
     salario = float(re.sub(',', '.', salari))
     if antig > fechalimite:

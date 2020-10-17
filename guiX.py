@@ -5,24 +5,27 @@ from mailmerge import MailMerge
 from tkcalendar import DateEntry
 from datetime import date
 from Buscador import indemnizacion_despido_prueba
+
 today = date.today()
 
 root = tk.Tk()
-
+root.iconbitmap("iconoaplicacionblanco.ico")
 root.resizable(width=False, height=False)
 root.title("Selección de Modelos de Recargo de Prestaciones")
 
-#Crear una elección de Modelo
+# Crear una elección de Modelo
 tk.Label(root, text="Elige modelo:", font=('Arial', 12, "bold"),
-         justify = tk.CENTER,
-         padx = 20).grid(row=2, column=0)
+         justify=tk.CENTER,
+         padx=20).grid(row=2, column=0)
 # Crear botones para elegir modelo.
-
 modelo = 1
 
+
+# crear funciones de ocultar y mostrar los distintos cuadros de texto y labels
 def numerodelmodelo(value):
     global modelo
     modelo = value
+
 
 def mostrarrecargocondena():
     label27.grid_forget()
@@ -49,49 +52,36 @@ def mostrarrecargocondena():
     label10.grid_forget()
     label27.grid_forget()
     entry27.grid_forget()
-    opt.grid_forget()
-    optlabel.grid_forget()
+    cbox.grid_forget()
+    cboxlabel.grid_forget()
     entry13.grid_forget()
     label13.grid_forget()
     entry14.grid_forget()
     label14.grid_forget()
-    label2.grid(row=6, column=0)
-    # Posicionar la caja 2 en la ventana, nombre del actor.
-    entry2.grid(row=6, column=2)
-    label3.grid(row=7, column=0)
-    # Posicionar la caja 3 en la ventana, nombre del demandado.
-    entry3.grid(row=7, column=2)
-    label4.grid(row=8, column=0)
-    # Posicionar la caja 4 en la ventana, nombre del demandado.
-    entry4.grid(row=8, column=2)
-    label5.grid(row=9, column=0)
-    # Posicionar la caja 5 en la ventana, nombre del demandado.
-    entry5.grid(row=9, column=2)
-    label15.grid(row=10, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry15.grid(row=10, column=2)
-    label6.grid(row=11, column=0)
-    # Posicionar la caja 6 en la ventana, nombre del demandado.
-    entry6.grid(row=11, column=2)
-    label7.grid(row=12, column=0)
-    # Posicionar la caja 7 en la ventana, nombre del demandado.
-    entry7.grid(row=12, column=2)
-    label8.grid(row=13, column=0)
-    # Posicionar la caja 8 en la ventana, nombre del demandado.
-    entry8.grid(row=13, column=2)
-    label9.grid(row=14, column=0)
-    # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry9.grid(row=14, column=2)
-    label10.grid(row=15, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry10.grid(row=15, column=2)
-    label11.grid(row=16, column=0)
-    # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry11.grid(row=16, column=2)
-    label12.grid(row=17, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry12.grid(row=17, column=2)
-    button.grid(row=20, column=1)
+    label2.grid(row=6, column=0, pady=4)
+    entry2.grid(row=6, column=2, pady=4)
+    label3.grid(row=7, column=0, pady=4)
+    entry3.grid(row=7, column=2, pady=4)
+    label4.grid(row=8, column=0, pady=4)
+    entry4.grid(row=8, column=2, pady=4)
+    entry5.grid(row=9, column=2, pady=4)
+    label15.grid(row=10, column=0, pady=4)
+    entry15.grid(row=10, column=2, pady=4)
+    label6.grid(row=11, column=0, pady=4)
+    entry6.grid(row=11, column=2, pady=4)
+    label7.grid(row=12, column=0, pady=4)
+    entry7.grid(row=12, column=2, pady=4)
+    label8.grid(row=13, column=0, pady=4)
+    entry8.grid(row=13, column=2, pady=4)
+    label9.grid(row=14, column=0, pady=4)
+    entry9.grid(row=14, column=2, pady=4)
+    label10.grid(row=15, column=0, pady=4)
+    entry10.grid(row=15, column=2, pady=4)
+    label11.grid(row=16, column=0, pady=4)
+    entry11.grid(row=16, column=2, pady=4)
+    label12.grid(row=17, column=0, pady=4)
+    entry12.grid(row=17, column=2, pady=4)
+    button.grid(row=20, column=1, pady=4)
 
 def mostrarrecargoestim():
     label27.grid_forget()
@@ -122,45 +112,39 @@ def mostrarrecargoestim():
     label13.grid_forget()
     entry14.grid_forget()
     label14.grid_forget()
-    opt.grid(row=5, column=2)
-    optlabel.grid(row=5, column=0)
-    label2.grid(row=6, column=0)
-    # Posicionar la caja 2 en la ventana, nombre del actor.
-    entry2.grid(row=6, column=2)
-    label3.grid(row=7, column=0)
-    # Posicionar la caja 3 en la ventana, nombre del demandado.
-    entry3.grid(row=7, column=2)
-    label4.grid(row=8, column=0)
-    # Posicionar la caja 4 en la ventana, nombre del demandado.
-    entry4.grid(row=8, column=2)
-    label5.grid(row=9, column=0)
-    # Posicionar la caja 5 en la ventana, nombre del demandado.
-    entry5.grid(row=9, column=2)
-    label15.grid(row=10, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry15.grid(row=10, column=2)
-    label6.grid(row=11, column=0)
-    # Posicionar la caja 6 en la ventana, nombre del demandado.
-    entry6.grid(row=11, column=2)
-    label7.grid(row=12, column=0)
+    cbox.grid(row=5, column=2, pady=4)
+    cboxlabel.grid(row=5, column=0, pady=4)
+    label2.grid(row=6, column=0, pady=4)
+    entry2.grid(row=6, column=2, pady=4)
+    label3.grid(row=7, column=0, pady=4)
+    entry3.grid(row=7, column=2, pady=4)
+    label4.grid(row=8, column=0, pady=4)
+    entry4.grid(row=8, column=2, pady=4)
+    label5.grid(row=9, column=0, pady=4)
+    entry5.grid(row=9, column=2, pady=4)
+    label15.grid(row=10, column=0, pady=4)
+    entry15.grid(row=10, column=2, pady=4)
+    label6.grid(row=11, column=0, pady=4)
+    entry6.grid(row=11, column=2, pady=4)
+    label7.grid(row=12, column=0, pady=4)
     # Posicionar la caja 7 en la ventana, nombre del demandado.
-    entry7.grid(row=12, column=2)
-    label8.grid(row=13, column=0)
+    entry7.grid(row=12, column=2, pady=4)
+    label8.grid(row=13, column=0, pady=4)
     # Posicionar la caja 8 en la ventana, nombre del demandado.
-    entry8.grid(row=13, column=2)
-    label9.grid(row=14, column=0)
+    entry8.grid(row=13, column=2, pady=4)
+    label9.grid(row=14, column=0, pady=4)
     # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry9.grid(row=14, column=2)
-    label10.grid(row=15, column=0)
+    entry9.grid(row=14, column=2, pady=4)
+    label10.grid(row=15, column=0, pady=4)
     # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry10.grid(row=15, column=2)
-    label11.grid(row=16, column=0)
+    entry10.grid(row=15, column=2, pady=4)
+    label11.grid(row=16, column=0, pady=4)
     # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry11.grid(row=16, column=2)
-    label12.grid(row=17, column=0)
+    entry11.grid(row=16, column=2, pady=4)
+    label12.grid(row=17, column=0, pady=4)
     # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry12.grid(row=17, column=2)
-    button.grid(row=20, column=1)
+    entry12.grid(row=17, column=2, pady=4)
+    button.grid(row=20, column=1, pady=4)
 
 def mostrarrecargoestimparcial():
     label27.grid_forget()
@@ -187,53 +171,41 @@ def mostrarrecargoestimparcial():
     label10.grid_forget()
     label27.grid_forget()
     entry27.grid_forget()
-    opt.grid_forget()
-    optlabel.grid_forget()
-    entry13.grid(row=16, column=2)
-    label13.grid(row=16, column=0)
-    entry14.grid(row=17, column=2)
-    label14.grid(row=17, column=0)
-    label2.grid(row=6, column=0)
-    # Posicionar la caja 2 en la ventana, nombre del actor.
-    entry2.grid(row=6, column=2)
-    label3.grid(row=7, column=0)
-    # Posicionar la caja 3 en la ventana, nombre del demandado.
-    entry3.grid(row=7, column=2)
-    label4.grid(row=8, column=0)
-    # Posicionar la caja 4 en la ventana, nombre del demandado.
-    entry4.grid(row=8, column=2)
-    label5.grid(row=9, column=0)
-    # Posicionar la caja 5 en la ventana, nombre del demandado.
-    entry5.grid(row=9, column=2)
-    label15.grid(row=10, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry15.grid(row=10, column=2)
-    label6.grid(row=11, column=0)
-    # Posicionar la caja 6 en la ventana, nombre del demandado.
-    entry6.grid(row=11, column=2)
-    label7.grid(row=12, column=0)
-    # Posicionar la caja 7 en la ventana, nombre del demandado.
-    entry7.grid(row=12, column=2)
-    label8.grid(row=13, column=0)
-    # Posicionar la caja 8 en la ventana, nombre del demandado.
-    entry8.grid(row=13, column=2)
-    label9.grid(row=14, column=0)
-    # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry9.grid(row=14, column=2)
-    label10.grid(row=15, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry10.grid(row=15, column=2)
-    label11.grid(row=18, column=0)
-    # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry11.grid(row=18, column=2)
-    label12.grid(row=19, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry12.grid(row=19, column=2)
-    button.grid(row=20, column=1)
+    cbox.grid_forget()
+    cboxlabel.grid_forget()
+    entry13.grid(row=16, column=2, pady=4)
+    label13.grid(row=16, column=0, pady=4)
+    entry14.grid(row=17, column=2, pady=4)
+    label14.grid(row=17, column=0, pady=4)
+    label2.grid(row=6, column=0, pady=4)
+    entry2.grid(row=6, column=2, pady=4)
+    label3.grid(row=7, column=0, pady=4)
+    entry3.grid(row=7, column=2, pady=4)
+    label4.grid(row=8, column=0, pady=4)
+    entry4.grid(row=8, column=2, pady=4)
+    label5.grid(row=9, column=0, pady=4)
+    entry5.grid(row=9, column=2, pady=4)
+    label15.grid(row=10, column=0, pady=4)
+    entry15.grid(row=10, column=2, pady=4)
+    label6.grid(row=11, column=0, pady=4)
+    entry6.grid(row=11, column=2, pady=4)
+    label7.grid(row=12, column=0, pady=4)
+    entry7.grid(row=12, column=2, pady=4)
+    label8.grid(row=13, column=0, pady=4)
+    entry8.grid(row=13, column=2, pady=4)
+    label9.grid(row=14, column=0, pady=4)
+    entry9.grid(row=14, column=2, pady=4)
+    label10.grid(row=15, column=0, pady=4)
+    entry10.grid(row=15, column=2, pady=4)
+    label11.grid(row=18, column=0, pady=4)
+    entry11.grid(row=18, column=2, pady=4)
+    label12.grid(row=19, column=0, pady=4)
+    entry12.grid(row=19, column=2, pady=4)
+    button.grid(row=20, column=1, pady=4)
 
 def mostrarextincionretraso():
-    opt.grid_forget()
-    optlabel.grid_forget()
+    cbox.grid_forget()
+    cboxlabel.grid_forget()
     entry13.grid_forget()
     label13.grid_forget()
     entry14.grid_forget()
@@ -252,37 +224,35 @@ def mostrarextincionretraso():
     label8.grid_forget()
     label27.grid_forget()
     entry27.grid_forget()
-    label2.grid(row=6, column=0)
-    entry2.grid(row=6, column=2)
-    label3.grid(row=7, column=0)
-    entry3.grid(row=7, column=2)
-    label20.grid(row=8, column=0)
-    entry20.grid(row=8, column=2)
-    label21.grid(row=9, column=0)
-    entry21.grid(row=9, column=2)
-    label22.grid(row=10, column=0)
-    entry22.grid(row=10, column=2)
-    label23.grid(row=11, column=0)
-    entry23.grid(row=11, column=2)
-    label24.grid(row=12, column=0)
-    entry24.grid(row=12, column=2)
-    opt2.grid(row=13, column=2)
-    optlabel2.grid(row=13, column=0)
-    entry9.grid(row=14, column=2)
-    label9.grid(row=14, column=0)
-    entry10.grid(row=15, column=2)
-    label10.grid(row=15, column=0)
-    label11.grid(row=17, column=0)
-    # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry11.grid(row=17, column=2)
-    label12.grid(row=18, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry12.grid(row=18, column=2)
-    button.grid(row=20, column=1)
+    label2.grid(row=6, column=0, pady=4)
+    entry2.grid(row=6, column=2, pady=4)
+    label3.grid(row=7, column=0, pady=4)
+    entry3.grid(row=7, column=2, pady=4)
+    label20.grid(row=8, column=0, pady=4)
+    entry20.grid(row=8, column=2, pady=4)
+    label21.grid(row=9, column=0, pady=4)
+    entry21.grid(row=9, column=2, pady=4)
+    label22.grid(row=10, column=0, pady=4)
+    entry22.grid(row=10, column=2, pady=4)
+    label23.grid(row=11, column=0, pady=4)
+    entry23.grid(row=11, column=2, pady=4)
+    label24.grid(row=12, column=0, pady=4)
+    entry24.grid(row=12, column=2, pady=4)
+    opt2.grid(row=13, column=2, pady=4)
+    optlabel2.grid(row=13, column=0, pady=4)
+    entry9.grid(row=14, column=2, pady=4)
+    label9.grid(row=14, column=0, pady=4)
+    entry10.grid(row=15, column=2, pady=4)
+    label10.grid(row=15, column=0, pady=4)
+    label11.grid(row=17, column=0, pady=4)
+    entry11.grid(row=17, column=2, pady=4)
+    label12.grid(row=18, column=0, pady=4)
+    entry12.grid(row=18, column=2, pady=4)
+    button.grid(row=20, column=1, pady=4)
 
 def mostrarextincionfaltapago():
-    opt.grid_forget()
-    optlabel.grid_forget()
+    cbox.grid_forget()
+    cboxlabel.grid_forget()
     entry13.grid_forget()
     label13.grid_forget()
     entry14.grid_forget()
@@ -299,39 +269,37 @@ def mostrarextincionfaltapago():
     label7.grid_forget()
     entry8.grid_forget()
     label8.grid_forget()
-    label2.grid(row=6, column=0)
-    entry2.grid(row=6, column=2)
-    label3.grid(row=7, column=0)
-    entry3.grid(row=7, column=2)
-    label20.grid(row=8, column=0)
-    entry20.grid(row=8, column=2)
-    label21.grid(row=9, column=0)
-    entry21.grid(row=9, column=2)
-    label22.grid(row=10, column=0)
-    entry22.grid(row=10, column=2)
-    label23.grid(row=11, column=0)
-    entry23.grid(row=11, column=2)
-    label24.grid(row=12, column=0)
-    entry24.grid(row=12, column=2)
-    opt2.grid(row=13, column=2)
-    optlabel2.grid(row=13, column=0)
-    entry9.grid(row=14, column=2)
-    label9.grid(row=14, column=0)
-    entry10.grid(row=15, column=2)
-    label10.grid(row=15, column=0)
-    label27.grid(row=16, column=0)
-    entry27.grid(row=16, column=2)
-    label11.grid(row=17, column=0)
-    # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry11.grid(row=17, column=2)
-    label12.grid(row=18, column=0)
-    # Posicionar la caja 10 en la ventana, nombre del demandado.
+    label2.grid(row=6, column=0, pady=4)
+    entry2.grid(row=6, column=2, pady=4)
+    label3.grid(row=7, column=0, pady=4)
+    entry3.grid(row=7, column=2, pady=4)
+    label20.grid(row=8, column=0, pady=4)
+    entry20.grid(row=8, column=2, pady=4)
+    label21.grid(row=9, column=0, pady=4)
+    entry21.grid(row=9, column=2, pady=4)
+    label22.grid(row=10, column=0, pady=4)
+    entry22.grid(row=10, column=2, pady=4)
+    label23.grid(row=11, column=0, pady=4)
+    entry23.grid(row=11, column=2, pady=4)
+    label24.grid(row=12, column=0, pady=4)
+    entry24.grid(row=12, column=2, pady=4)
+    opt2.grid(row=13, column=2, pady=4)
+    optlabel2.grid(row=13, column=0, pady=4)
+    entry9.grid(row=14, column=2, pady=4)
+    label9.grid(row=14, column=0, pady=4)
+    entry10.grid(row=15, column=2, pady=4)
+    label10.grid(row=15, column=0, pady=4)
+    label27.grid(row=16, column=0, pady=4)
+    entry27.grid(row=16, column=2, pady=4)
+    label11.grid(row=17, column=0, pady=4)
+    entry11.grid(row=17, column=2, pady=4)
+    label12.grid(row=18, column=0, pady=4)
     entry12.grid(row=18, column=2)
     button.grid(row=20, column=1)
 
 def mostrarextincionmodificacion():
-    opt.grid_forget()
-    optlabel.grid_forget()
+    cbox.grid_forget()
+    cboxlabel.grid_forget()
     entry13.grid_forget()
     label13.grid_forget()
     entry14.grid_forget()
@@ -350,41 +318,53 @@ def mostrarextincionmodificacion():
     label8.grid_forget()
     label27.grid_forget()
     entry27.grid_forget()
-    label2.grid(row=6, column=0)
-    entry2.grid(row=6, column=2)
-    label3.grid(row=7, column=0)
-    entry3.grid(row=7, column=2)
-    label20.grid(row=8, column=0)
-    entry20.grid(row=8, column=2)
-    label21.grid(row=9, column=0)
-    entry21.grid(row=9, column=2)
-    label22.grid(row=10, column=0)
-    entry22.grid(row=10, column=2)
-    label23.grid(row=11, column=0)
-    entry23.grid(row=11, column=2)
-    label24.grid(row=12, column=0)
-    entry24.grid(row=12, column=2)
-    opt2.grid(row=13, column=2)
-    optlabel2.grid(row=13, column=0)
-    entry9.grid(row=14, column=2)
-    label9.grid(row=14, column=0)
-    entry10.grid(row=15, column=2)
-    label10.grid(row=15, column=0)
-    label11.grid(row=17, column=0)
+    label2.grid(row=6, column=0, pady=4)
+    entry2.grid(row=6, column=2, pady=4)
+    label3.grid(row=7, column=0, pady=4)
+    entry3.grid(row=7, column=2, pady=4)
+    label20.grid(row=8, column=0, pady=4)
+    entry20.grid(row=8, column=2, pady=4)
+    label21.grid(row=9, column=0, pady=4)
+    entry21.grid(row=9, column=2, pady=4)
+    label22.grid(row=10, column=0, pady=4)
+    entry22.grid(row=10, column=2, pady=4)
+    label23.grid(row=11, column=0, pady=4)
+    entry23.grid(row=11, column=2, pady=4)
+    label24.grid(row=12, column=0, pady=4)
+    entry24.grid(row=12, column=2, pady=4)
+    opt2.grid(row=13, column=2, pady=4)
+    optlabel2.grid(row=13, column=0, pady=4)
+    entry9.grid(row=14, column=2, pady=4)
+    label9.grid(row=14, column=0, pady=4)
+    entry10.grid(row=15, column=2, pady=4)
+    label10.grid(row=15, column=0, pady=4)
+    label11.grid(row=17, column=0, pady=4)
     # Posicionar la caja 9 en la ventana, nombre del demandado.
-    entry11.grid(row=17, column=2)
-    label12.grid(row=18, column=0)
+    entry11.grid(row=17, column=2, pady=4)
+    label12.grid(row=18, column=0, pady=4)
     # Posicionar la caja 10 en la ventana, nombre del demandado.
-    entry12.grid(row=18, column=2)
-    button.grid(row=20, column=1)
+    entry12.grid(row=18, column=2, pady=4)
+    button.grid(row=20, column=1, pady=4)
 
-botoncondena = tk.Button(root, text="Condenatoria", command=lambda: [mostrarrecargocondena(), numerodelmodelo(1)], width=20)
-botonabsolucion = tk.Button(root, text="Estimatoria", command=lambda: [mostrarrecargoestim(), numerodelmodelo(2)], width=20)
-botonabsolucion2 = tk.Button(root, text="Estimatoria Parcial", command=lambda: [mostrarrecargoestimparcial(), numerodelmodelo(3)], width=20)
+# crear botones de seleccion de los modelos
 
-botonretraso = tk.Button(root, text="Retraso en el pago", width="20", command=lambda: [mostrarextincionretraso(), numerodelmodelo(4)])
-botonfaltapago = tk.Button(root, text="Falta de pago", width="20", command=lambda: [mostrarextincionfaltapago(), numerodelmodelo(5)])
-botonmodificacion = tk.Button(root, text="Modificacion Condiciones", width="20", command=lambda: [mostrarextincionmodificacion(), numerodelmodelo(6)])
+botoncondena = tk.Button(root, text="Condenatoria", command=lambda: [mostrarrecargocondena(), numerodelmodelo(1)],
+                         width=20, pady=2, padx=10)
+botonabsolucion = tk.Button(root, text="Estimatoria", command=lambda: [mostrarrecargoestim(), numerodelmodelo(2)],
+                            width=20, pady=2, padx=10)
+botonabsolucion2 = tk.Button(root, text="Estimatoria Parcial",
+                             command=lambda: [mostrarrecargoestimparcial(), numerodelmodelo(3)], width=20, pady=2,
+                             padx=10)
+
+botonretraso = tk.Button(root, text="Retraso en el pago", width="20",
+                         command=lambda: [mostrarextincionretraso(), numerodelmodelo(4)], pady=2, padx=10)
+botonfaltapago = tk.Button(root, text="Falta de pago", width="20",
+                           command=lambda: [mostrarextincionfaltapago(), numerodelmodelo(5)], pady=2, padx=10)
+botonmodificacion = tk.Button(root, text="Modificacion Condiciones", width="20",
+                              command=lambda: [mostrarextincionmodificacion(), numerodelmodelo(6)], pady=2, padx=10)
+
+
+# crear funciones de ocultar y mostrar los botones de seleccion de los modelos
 
 def mostrarrecargo():
     botoncondena.grid(row=1, column=2)
@@ -396,26 +376,37 @@ def mostrarrecargo():
 
 
 def mostrarexincion():
-    botonretraso.grid(row=1,column=2)
-    botonfaltapago.grid(row=2,column=2)
-    botonmodificacion.grid(row=3,column=2)
+    botonretraso.grid(row=1, column=2)
+    botonfaltapago.grid(row=2, column=2)
+    botonmodificacion.grid(row=3, column=2)
     botoncondena.grid_forget()
     botonabsolucion.grid_forget()
     botonabsolucion2.grid_forget()
 
 
-botonrecargo = tk.Button(root, text="Recargo de Prestaciones", width="20", command= lambda: [mostrarrecargo()]).grid(row=1,column=1)
-botonextinción = tk.Button(root, text="Extinción del Contrato", width="20", command= lambda: [mostrarexincion()]).grid(row=3,column=1)
+# crear botones principales
 
-#aqui ponemos fuerza mayor o caso fortuito
+botonrecargo = tk.Button(root, text="Recargo de Prestaciones", width="20", command=lambda: [mostrarrecargo()]).grid(
+    row=1, column=1, pady=4, padx=5)
+botonextinción = tk.Button(root, text="Extinción del Contrato", width="20", command=lambda: [mostrarexincion()]).grid(
+    row=3, column=1, pady=4, padx=5)
+
+# aqui ponemos combobox de fuerza mayor o caso fortuito
+
+mayorofortuito = None
 
 
+def check_cbox(event):
+    global mayorofortuito
+    if cbox.get() == 'Fuerza Mayor':
+        mayorofortuito = cbox.get()  # this will assign the variable c the value of cbox
+    if cbox.get() == 'Fortuito':
+        mayorofortuito = cbox.get()
 
-OptionList = ["Fuerza Mayor", "Fortuito"]
-variable = tk.StringVar()
-variable.set(OptionList[0])
-opt = tk.OptionMenu(root, variable, *OptionList)
-optlabel = ttk.Label(root, text="Fundamento de estimatoria")
+
+cbox = ttk.Combobox(root, values=["Fuerza Mayor", "Fortuito"], width=17)
+cboxlabel = ttk.Label(root, text="Fundamento de estimatoria")
+cbox.bind("<<ComboboxSelected>>", check_cbox)
 
 # Espacio en blanco.
 labelx = ttk.Label(root, text=" ").grid(row=4, column=0)
@@ -425,68 +416,54 @@ entry_var2 = tk.StringVar()
 entry2 = ttk.Entry(root, textvariable=entry_var2, justify=tk.CENTER)
 label2 = ttk.Label(root, text="Nombre del actor")
 
-
-
 # Crear caja de texto 3, nombre del demandado.
 entry_var3 = tk.StringVar()
 entry3 = ttk.Entry(root, textvariable=entry_var3, justify=tk.CENTER)
 label3 = ttk.Label(root, text="Nombre del demandado")
 
-
-
 # Crear caja de fecha 4, fecha de acta.
 entry_var4 = tk.StringVar()
-entry4 = DateEntry(root, textvariable=entry_var4, width=17, background='gray', foreground='white', borderwidth=1)
+entry4 = DateEntry(root, textvariable=entry_var4, date_pattern='dd/mm/Y', width=17, background='gray',
+                   foreground='white', borderwidth=1)
 label4 = ttk.Label(root, text="Fecha del Acta de Infracción")
 
 # Crear caja de fecha 5, fecha resolucion impugnada.
 entry_var5 = tk.StringVar()
-entry5 = DateEntry(root, textvariable=entry_var5, width=17, background='gray', foreground='white', borderwidth=1)
+entry5 = DateEntry(root, textvariable=entry_var5, date_pattern='dd/mm/Y', width=17, background='gray',
+                   foreground='white', borderwidth=1)
 label5 = ttk.Label(root, text="Fecha de la Resolución impugnada")
-
-
 
 # Crear caja de texto 15, porcentaje impuesto por la Inspección.
 entry_var15 = tk.StringVar()
 entry15 = ttk.Entry(root, textvariable=entry_var15, justify=tk.CENTER)
 label15 = ttk.Label(root, text="Porcentaje impuesto por la Inspección")
 
-
-
 # Crear caja de texto 6, artículos infringidos.
 entry_var6 = tk.StringVar()
 entry6 = ttk.Entry(root, textvariable=entry_var6, justify=tk.CENTER)
 label6 = ttk.Label(root, text="Artículos infringidos según acta de Infracción")
 
-
-
 # Crear caja de fecha 7, fecha de la reclamación previa.
 entry_var7 = tk.StringVar()
-entry7 = DateEntry(root, textvariable=entry_var7, width=17, background='gray', foreground='white', borderwidth=1)
+entry7 = DateEntry(root, textvariable=entry_var7, date_pattern='dd/mm/Y', width=17, background='gray',
+                   foreground='white', borderwidth=1)
 label7 = ttk.Label(root, text="Fecha de la Reclamación Previa")
-
-
 
 # Crear caja de fecha 8, fecha de la resolución de la reclamación previa.
 entry_var8 = tk.StringVar()
-entry8 = DateEntry(root, textvariable=entry_var8, width=17, background='gray', foreground='white', borderwidth=1)
+entry8 = DateEntry(root, textvariable=entry_var8, date_pattern='dd/mm/Y', width=17, background='gray',
+                   foreground='white', borderwidth=1)
 label8 = ttk.Label(root, text="Fecha de Resolución de la Reclamación Previa")
-
-
 
 # Crear caja de texto 9, pruena practicada.
 entry_var9 = tk.StringVar()
 entry9 = ttk.Entry(root, textvariable=entry_var9, justify=tk.CENTER)
 label9 = ttk.Label(root, text="Prueba practicada aparte de la documental")
 
-
-
 # Crear caja de texto 10, en el presente caso.
 entry_var10 = tk.StringVar()
 entry10 = ttk.Entry(root, textvariable=entry_var10, justify=tk.CENTER)
 label10 = ttk.Label(root, text="En el presente caso...")
-
-
 
 # Crear caja de texto 10, nombre del demandado.
 entry_var13 = tk.StringVar()
@@ -500,12 +477,10 @@ entry14 = ttk.Entry(root, textvariable=entry_var14, justify=tk.CENTER)
 label14 = ttk.Label(root, text="Justificación del porcentaje que se impone")
 # Posicionar la caja 10 en la ventana, nombre del demandado.
 
-
 # Crear caja de texto 11, numero del procedimiento.
 entry_var11 = tk.StringVar()
 entry11 = ttk.Entry(root, textvariable=entry_var11, justify=tk.CENTER)
 label11 = ttk.Label(root, text="Número del procedimiento")
-
 
 # Crear caja de texto 12, año del procedimiento.
 entry_var12 = tk.StringVar()
@@ -519,36 +494,40 @@ label20 = ttk.Label(root, text="Actividad de la Empresa")
 
 # Crear caja de fecha 5, fecha resolucion impugnada.
 entry_var21 = tk.StringVar()
-entry21 = DateEntry(root, textvariable=entry_var21, width=17, background='gray', foreground='white', borderwidth=1)
+entry21 = DateEntry(root, textvariable=entry_var21, date_pattern='dd/mm/Y', width=17, background='gray',
+                    foreground='white', borderwidth=1)
 label21 = ttk.Label(root, text="Antigüedad")
-
-
 
 # Crear caja de texto 15, porcentaje impuesto por la Inspección.
 entry_var22 = tk.StringVar()
 entry22 = ttk.Entry(root, textvariable=entry_var22, justify=tk.CENTER)
 label22 = ttk.Label(root, text="Categoría Profesional")
 
-
-
 # Crear caja de texto 6, artículos infringidos.
 entry_var23 = tk.StringVar()
 entry23 = ttk.Entry(root, textvariable=entry_var23, justify=tk.CENTER)
 label23 = ttk.Label(root, text="Salario diario")
 
-
-
 # Crear caja de fecha 7, fecha de la reclamación previa.
 entry_var24 = tk.StringVar()
-entry24 = DateEntry(root, textvariable=entry_var24, width=17, background='gray', foreground='white', borderwidth=1)
+entry24 = DateEntry(root, textvariable=entry_var24, date_pattern='dd/mm/Y', width=17, background='gray',
+                    foreground='white', borderwidth=1)
 label24 = ttk.Label(root, text="Fecha celebración SEMAC")
 
-OptionList2 = ["Sin avenencia", "Sin efecto"]
-variable2 = tk.StringVar()
-variable2.set(OptionList2[0])
-opt2 = tk.OptionMenu(root, variable2, *OptionList2)
-optlabel2 = ttk.Label(root, text="Resultado del SEMAC")
+avenenciaoefecto = None
 
+
+def check_cbox(event):
+    global avenenciaoefecto
+    if opt2.get() == 'Sin avenencia':
+        avenenciaoefecto = opt2.get()  # this will assign the variable c the value of cbox
+    if opt2.get() == 'Sin efecto':
+        avenenciaoefecto = opt2.get()
+
+
+opt2 = ttk.Combobox(root, values=["Sin avenencia", "Sin efecto"], width=17)
+optlabel2 = ttk.Label(root, text="Resultado del SEMAC")
+opt2.bind("<<ComboboxSelected>>", check_cbox)
 
 # Crear caja de texto 10, nombre del demandado.
 entry_var27 = tk.StringVar()
@@ -556,13 +535,14 @@ entry27 = ttk.Entry(root, textvariable=entry_var27, justify=tk.CENTER)
 label27 = ttk.Label(root, text="Desde cuando no cobra")
 # Posicionar la caja 10 en la ventana, nombre del demandado.
 
-
-
-
 # Posicionar boton de fin
 button = ttk.Button(root, text="Crear Modelo", command=root.destroy)
 
+# mainloop de la ventana
+
 root.mainloop()
+
+# selección del modelo a usar en función de los botones pulsados
 
 if modelo == 1:
     template = "Prueba1.docx"
@@ -576,6 +556,8 @@ elif modelo == 6:
     template = "Extincion modificacion sustancial.docx"
 else:
     template = "Prueba4.docx"
+
+# creacion de variables para el nombre del archivo
 
 if template == "Prueba1.docx":
     sentido = "desestim"
@@ -603,41 +585,101 @@ elif template == "Extincion modificacion sustancial.docx":
 else:
     materia = "recargo prestaciones"
 
+# uso del template elegido
+
 document = MailMerge(template)
 
-indemnizacion = indemnizacion_despido_prueba(str(entry_var21.get()),str(entry_var23.get()),str(today))
+
+# creación de función para ver si la opción de indemnización ha sido seleccionada y rellenada, en caso contrario no hace nada
+
+def indemnizacionsiono():
+    if entry_var23.get():
+        return indemnizacion_despido_prueba(str(entry_var21.get()), str(entry_var23.get()), str(today))
+    else:
+        valor0 = 0
+        return valor0
+
+
+# crear funcion de mayusculas y minusculas actor
+
+def actorcapitalizacion():
+    if template == "Prueba1.docx":
+        return str(entry_var2.get()).upper()
+    elif template == "Prueba5.docx":
+        return str(entry_var2.get()).upper()
+    elif template == "Extincion retraso pago.docx":
+        return str(entry_var2.get()).title()
+    elif template == "Extincion falta de pago.docx":
+        return str(entry_var2.get()).title()
+    elif template == "Extincion modificacion sustancial.docx":
+        return str(entry_var2.get()).title()
+
+
+# crear funcion de mayusculas y minusculas demandado
+
+def demandadocapitalizacion():
+    if template == "Prueba1.docx":
+        return str(entry_var3.get()).title()
+    elif template == "Prueba5.docx":
+        return str(entry_var3.get()).title()
+    elif template == "Extincion retraso pago.docx":
+        return str(entry_var3.get()).upper()
+    elif template == "Extincion falta de pago.docx":
+        return str(entry_var3.get()).upper()
+    elif template == "Extincion modificacion sustancial.docx":
+        return str(entry_var3.get()).upper()
+
+
+# crear funcion tipo de extincion
+
+tipoextin = None
+
+if template == "Extincion retraso pago.docx":
+    tipoextin = "retraso pago"
+elif template == "Extincion falta de pago.docx":
+    tipoextin = "falta de pago"
+elif template == "Extincion modificacion sustancial.docx":
+    tipoextin = "modificacion sustancial"
+else:
+    tipoextin = ""
+
+# meter todos los datos en el modelo
 
 document.merge(
-        Actor=str(entry_var2.get()).upper(),
-        Demandado=str(entry_var3.get()).title(),
-        Fechaactainspeccion=entry_var4.get(),
-        fecharesolucionrecargo=entry_var5.get(),
-        articulosinfringidos=str(entry_var6.get()) + " de la LPRL",
-        fechareclamacionprevia=entry_var7.get(),
-        fecharesolucionreclamacionprevia=entry_var8.get(),
-        pruebaspracticadas=" así como la " + str(entry_var9.get()),
-        Año=entry_var12.get(),
-        Número=entry_var11.get(),
-        Enelpresentecaso=entry_var10.get(),
-        porcentajequeseimpone=entry_var13.get(),
-        justificacionporcentaje=entry_var14.get(),
-        porcentajerecargo=entry_var15.get(),
-        antiguedad=entry_var21.get(),
-        desdecuandonocobra=entry_var27.get(),
-        fechasemac=entry_var24.get(),
-        indemnizacionextincion=indemnizacion,
-        categoría=entry_var22.get(),
-        salariodia=entry_var23.get(),
-        actividadempresa=entry_var20.get())
+    Actor=actorcapitalizacion(),
+    Demandado=demandadocapitalizacion(),
+    Fechaactainspeccion=entry_var4.get(),
+    fecharesolucionrecargo=entry_var5.get(),
+    articulosinfringidos=str(entry_var6.get()) + " de la LPRL",
+    fechareclamacionprevia=entry_var7.get(),
+    fecharesolucionreclamacionprevia=entry_var8.get(),
+    pruebaspracticadas=" así como la " + str(entry_var9.get()),
+    Año=entry_var12.get(),
+    Número=entry_var11.get(),
+    Enelpresentecaso=entry_var10.get(),
+    porcentajequeseimpone=entry_var13.get(),
+    justificacionporcentaje=entry_var14.get(),
+    porcentajerecargo=entry_var15.get(),
+    antiguedad=entry_var21.get(),
+    desdecuandonocobra=entry_var27.get(),
+    fechasemac=entry_var24.get(),
+    indemnizacionextincion=indemnizacionsiono(),
+    categoría=entry_var22.get(),
+    salariodia=entry_var23.get(),
+    actividadempresa=entry_var20.get())
 
-if variable.get() == "Fuerza Mayor":
-    document.merge(fortuitomayor1="por la fuerza mayor operada al tiempo del accidente", fortuitomayor2 = "sino que el hecho acaecido responde a un caso de fuerza mayor, esto es, un evento extraño al círculo o ámbito de la actividad del trabajador y de la empresa, que rompe el nexo de causalidad")
+if mayorofortuito == "Fuerza Mayor":
+    document.merge(fortuitomayor1="por la fuerza mayor operada al tiempo del accidente",
+                   fortuitomayor2="sino que el hecho acaecido responde a un caso de fuerza mayor, esto es, un evento extraño al círculo o ámbito de la actividad del trabajador y de la empresa, que rompe el nexo de causalidad")
 else:
-    document.merge(fortuitomayor1="por su acaecimiento fortuito", fortuitomayor2 = "sino que el hecho acaecido responde a un caso fortuito, esto es, un hecho independiente de la voluntad del deudor de seguridad (la empresa), imprevisible e inevitable")
+    document.merge(fortuitomayor1="por su acaecimiento fortuito",
+                   fortuitomayor2="sino que el hecho acaecido responde a un caso fortuito, esto es, un hecho independiente de la voluntad del deudor de seguridad (la empresa), imprevisible e inevitable")
 
-if variable2.get() == "Sin avenencia":
+if avenenciaoefecto == "Sin avenencia":
     document.merge(avenenciaoefecto="sin avenencia")
 else:
     document.merge(avenenciaoefecto="sin efecto")
 
-document.write(materia + " " + entry_var11.get() + "-" + entry_var12.get() + " " + sentido + '.docx')
+# creación del archivo de texto
+
+document.write(materia + " " + tipoextin + " " + entry_var11.get() + "-" + entry_var12.get() + " " + sentido + '.docx')
