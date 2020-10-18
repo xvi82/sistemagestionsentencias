@@ -4,7 +4,7 @@ from tkinter import ttk
 from mailmerge import MailMerge
 from tkcalendar import DateEntry
 from datetime import date
-from Buscador import *
+from Buscador import indemnizacion_despido_prueba, buscador
 import pdftotext
 from nltk.tokenize import word_tokenize
 import re
@@ -81,73 +81,82 @@ for i in textprov:
         t.append(i)
 textdef = [word for word in textprov if word not in t]
 
-# convierte el texto tokenizado en un texto tratable
-text = nltk.Text(textdef)
-
-# variables vacias
-
-
-
 # expresiones regulares para el salario y la fecha de efectos
 
 if "extinci" in textdef:
     salarioregex = re.compile('(\d+(\,|\.)?\d+?(\,|\.)?\d+?|\d+)')
     fechaefectosregex = re.compile('\d{1,2}(\/|\.|\-)\d{1,2}(\/|\.|\-)\d{1,4}')
-
     fechas = [word for word in textdef if re.match('\d{1,2}(\/|\.|\-)\d{1,2}(\/|\.|\-)\d{1,4}', word)]
     try:
         despid = fechas[-1]
     except:
         despid = None
-
     try:
         antig = fechas[0]
     except:
         antig = None
-    salario = None
-    demandante = None
-    demandado = None
     actainfraccion = None
     resolucionrecargo = None
     reclamacionprevia = None
     resolucionreclamacion = None
     recargo = None
-    try:
-        for word in textdef:
+    for word in textdef:
+        try:
             if word == "salario":
                 if re.match(salarioregex, textdef[(textdef.index(word)) + 2]):
                     salario = textdef[(textdef.index(word)) + 2]
                 elif re.match(salarioregex, textdef[(textdef.index(word)) + 1]):
                     salario = textdef[(textdef.index(word)) + 1]
+        except:
+            salario = None
+        try:
             if word == "representación":
                 repreindex = textdef.index(word)
             if word == "mayor":
                 mayorindex = textdef.index(word)
                 demandante = (' '.join(textdef[repreindex + 1:mayorindex - 1])).title()
+        except:
+            demandante = None
+        try:
             if word == "empresa":
                 empresaindex = textdef.index(word)
             if word == "cif" or word == "nif":
                 cifindex = textdef.index(word)
                 demandado = (' '.join(textdef[empresaindex + 1:cifindex - 1])).upper()
-    except:
-        salario = None
-        demandante = None
-        demandado = None
+        except:
+            demandado = None
 elif "recargo" in textdef:
+    fechas = [word for word in textdef if re.match('\d{1,2}(\/|\.|\-)\d{1,2}(\/|\.|\-)\d{1,4}', word)]
     salario = None
     antig = None
     despid = None
-    fechas = [word for word in textdef if re.match('\d{1,2}(\/|\.|\-)\d{1,2}(\/|\.|\-)\d{1,4}', word)]
+    def encontrarfechacercadeunapalabra(texto, palabra, fechas):
+        listpalabra = buscador(texto, palabra)
+        fechasindex = list()
+        for dates in fechas:
+            fechasindex.append(textdef.index(dates))
+        fechaindex = None
+        for indexpalabra in listpalabra:
+            for indexfechas in fechasindex:
+                if indexfechas - indexpalabra > 1 and indexfechas - indexpalabra < 4:
+                    fechaindex = fechasindex.index(indexfechas)
+        fechabuscada = fechas[fechaindex]
+        return fechabuscada
     try:
-
-        actainfraccion = fechas[1]
-        resolucionrecargo = fechas[2]
-        reclamacionprevia = fechas[3]
-        resolucionreclamacion = fechas[4]
+        actainfraccion = encontrarfechacercadeunapalabra(textdef, "acta", fechas)
     except:
         actainfraccion = None
+    try:
+        resolucionrecargo = encontrarfechacercadeunapalabra(textdef, "resolución", fechas)
+    except:
         resolucionrecargo = None
+    try:
+        reclamacionprevia = encontrarfechacercadeunapalabra(textdef, "reclamación", fechas)
+    except:
         reclamacionprevia = None
+    try:
+        resolucionreclamacion = encontrarfechacercadeunapalabra(textdef, "provincial", fechas)
+    except:
         resolucionreclamacion = None
     try:
         for word in textdef:
@@ -155,12 +164,12 @@ elif "recargo" in textdef:
                 repreindex = textdef.index(word)
             if word == "cif":
                 mayorindex = textdef.index(word)
-                demandante = (' '.join(textdef[repreindex + 1:mayorindex - 1])).title()
+                demandante = (' '.join(textdef[repreindex + 1:mayorindex - 1])).upper()
             if word == "interesado":
                 empresaindex = textdef.index(word)
             if word == "dni":
                 cifindex = textdef.index(word)
-                demandado = (' '.join(textdef[empresaindex + 1:cifindex - 1])).upper()
+                demandado = (' '.join(textdef[empresaindex + 1:cifindex - 1])).title()
             if word == "incrementadas":
                 recargoindex = textdef.index(word)
                 recargo = textdef[recargoindex + 1]
@@ -859,7 +868,7 @@ document.merge(
     desdecuandonocobra=entry_var27.get(),
     fechasemac=entry_var24.get(),
     indemnizacionextincion=indemnizacionsiono(),
-    categoría=entry_var22.get(),
+    categoria=entry_var22.get(),
     salariodia=entry_var23.get(),
     actividadempresa=entry_var20.get())
 
