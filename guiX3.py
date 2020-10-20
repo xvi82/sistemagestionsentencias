@@ -4,12 +4,10 @@ from tkinter import ttk
 from mailmerge import MailMerge
 from tkcalendar import DateEntry
 from datetime import date
-from Buscador import indemnizacion_despido_prueba, buscador
-import pdftotext
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
+from Buscador import indemnizacion_despido_prueba
 from tkinter import *
 from tkinter import filedialog
+from FuncionesGestor import *
 
 #fecha de hoy
 today = date.today()
@@ -59,131 +57,38 @@ inicio.mainloop()
 
 try:
     pdfname = str(document)
-    with open(pdfname, "rb") as f:
-        pdf = pdftotext.PDF(f)
-        document = "\n\n".join(pdf)
-
-    # limpiar el texto de ruido
-
-    cleaned = re.sub(r'[^A-ZñÑa-zá-úä-ü0-9.,\/]+', ' ', document)
-
-    # tokenizar el texto
-
-    tokenized = word_tokenize(cleaned.lower())
-
-    # limpiar el texto de stopwords y tener el texto definitivo de trabajo
-
-    stopwords = set(stopwords.words('spanish'))
-    textprov = [word for word in tokenized if word not in stopwords]
-    t = list()
-    for i in textprov:
-        if re.match('\,', i):
-            t.append(i)
-        if re.match('\.', i):
-            t.append(i)
-    textdef = [word for word in textprov if word not in t]
-
-    # expresiones regulares para el salario y la fecha de efectos
-
-    salarioregex = re.compile('(\d+(\,|\.)?\d+?(\,|\.)?\d+?|\d+)')
-    fechaefectosregex = re.compile('\d{1,2}(\/|\.|\-)\d{1,2}(\/|\.|\-)\d{1,4}')
-    fechas = [word for word in textdef if re.match('\d{1,2}(\/|\.|\-)\d{1,2}(\/|\.|\-)\d{1,4}', word)]
+    documento = abrirpdf(pdfname)
+    textdef = preparar_texto(documento)
 
     #distinguir la extraccion de datos según se trate de un modelo de extinción o de recargo
 
     if "extinci" in textdef:
-        try:
-            despid = fechas[-1]
-        except:
-            despid = None
-        try:
-            antig = fechas[0]
-        except:
-            antig = None
-        for word in textdef:
-            try:
-                if word == "salario":
-                    if re.match(salarioregex, textdef[(textdef.index(word)) + 2]):
-                        salario = textdef[(textdef.index(word)) + 2]
-                    elif re.match(salarioregex, textdef[(textdef.index(word)) + 1]):
-                        salario = textdef[(textdef.index(word)) + 1]
-            except:
-                salario = None
-            try:
-                if word == "representación":
-                    repreindex = textdef.index(word)
-                if word == "mayor":
-                    mayorindex = textdef.index(word)
-                    demandante = (' '.join(textdef[repreindex + 1:mayorindex - 1])).title()
-            except:
-                demandante = None
-            try:
-                if word == "empresa":
-                    empresaindex = textdef.index(word)
-                if word == "cif" or word == "nif":
-                    cifindex = textdef.index(word)
-                    demandado = (' '.join(textdef[empresaindex + 1:cifindex - 1])).upper()
-            except:
-                demandado = None
+        antig = encontrarfechaantiguedad(textdef)
+        salario = encontrarsalario(textdef)
+        demandante = encontrardemandante(textdef)
+        demandado = encontrardemandado(textdef)
+        categoria = str(encontrarcategoria(textdef)).title()
+        actividad = encontraractividad(textdef)
         actainfraccion = None
         resolucionrecargo = None
         reclamacionprevia = None
         resolucionreclamacion = None
         recargo = None
     elif "recargo" in textdef:
-        def encontrarfechacercadeunapalabra(texto, palabra, fechas):
-            listpalabra = buscador(texto, palabra)
-            fechasindex = list()
-            for dates in fechas:
-                fechasindex.append(textdef.index(dates))
-            fechaindex = None
-            for indexpalabra in listpalabra:
-                for indexfechas in fechasindex:
-                    if indexfechas - indexpalabra > 1 and indexfechas - indexpalabra < 4:
-                        fechaindex = fechasindex.index(indexfechas)
-            fechabuscada = fechas[fechaindex]
-            return fechabuscada
-        try:
-            actainfraccion = encontrarfechacercadeunapalabra(textdef, "acta", fechas)
-        except:
-            actainfraccion = None
-        try:
-            resolucionrecargo = encontrarfechacercadeunapalabra(textdef, "resolución", fechas)
-        except:
-            resolucionrecargo = None
-        try:
-            reclamacionprevia = encontrarfechacercadeunapalabra(textdef, "reclamación", fechas)
-        except:
-            reclamacionprevia = None
-        try:
-            resolucionreclamacion = encontrarfechacercadeunapalabra(textdef, "provincial", fechas)
-        except:
-            resolucionreclamacion = None
-        try:
-            for word in textdef:
-                if word == "representación":
-                    repreindex = textdef.index(word)
-                if word == "cif":
-                    mayorindex = textdef.index(word)
-                    demandante = (' '.join(textdef[repreindex + 1:mayorindex - 1])).upper()
-                if word == "interesado":
-                    empresaindex = textdef.index(word)
-                if word == "dni":
-                    cifindex = textdef.index(word)
-                    demandado = (' '.join(textdef[empresaindex + 1:cifindex - 1])).title()
-                if word == "incrementadas":
-                    recargoindex = textdef.index(word)
-                    recargo = textdef[recargoindex + 1]
-        except:
-            demandante = None
-            demandado = None
-            recargo = None
+        actainfraccion = encontrarfechacercadeunapalabra(textdef, "acta")
+        resolucionrecargo = encontrarfechacercadeunapalabra(textdef, "resolución")
+        reclamacionprevia = encontrarfechacercadeunapalabra(textdef, "reclamación")
+        resolucionreclamacion = encontrarfechacercadeunapalabra(textdef, "provincial")
+        demandante = encontrardemandanterecargo(textdef)
+        demandado = encontrardemandadorecargo(textdef)
+        recargo = encontrarporcentajerecargo(textdef)
         salario = None
-        antig = None
-        despid = None
+        categoria = None
+        actividad = None
 except:
     salario = None
-    antig = None
+    categoria = None
+    actividad = None
     despid = None
     demandante = None
     demandado = None
@@ -216,7 +121,7 @@ positionDown = int(principal.winfo_screenheight() / 2 - windowHeight / 2)
 # Posiciona la ventana en el centro.
 principal.geometry("+{}+{}".format(positionRight, positionDown))
 
-#datos de la ventana
+# datos de la ventana
 
 principal.iconbitmap("iconoaplicacionblanco.ico")
 principal.resizable(width=False, height=False)
@@ -700,6 +605,8 @@ label_year = ttk.Label(principal, text="Año", background="#ffffff")
 entry_var_activempres = tk.StringVar()
 entry_activempres = ttk.Entry(principal, textvariable=entry_var_activempres, justify=tk.CENTER)
 label_activempres = ttk.Label(principal, text="Actividad de la Empresa", background="#ffffff")
+if actividad:
+    entry_activempres.insert(0, actividad)
 
 # Crear caja de fecha 5, fecha resolucion impugnada.
 entry_var_antig = tk.StringVar()
@@ -713,6 +620,8 @@ if antig:
 entry_var_categoria = tk.StringVar()
 entry_categoria = ttk.Entry(principal, textvariable=entry_var_categoria, justify=tk.CENTER)
 label_categoria = ttk.Label(principal, text="Categoría Profesional", background="#ffffff")
+if categoria:
+    entry_categoria.insert(0, categoria)
 
 # Crear caja de texto 6, artículos infringidos.
 entry_var_salario = tk.StringVar()
@@ -729,14 +638,12 @@ label_fechasemac = ttk.Label(principal, text="Fecha celebración SEMAC", backgro
 
 avenenciaoefecto = None
 
-
 def check_cboxmayorofortuito(event):
     global avenenciaoefecto
     if resultsemac.get() == 'Sin avenencia':
         avenenciaoefecto = resultsemac.get()  # this will assign the variable c the value of cboxmayorofortuito
     if resultsemac.get() == 'Sin efecto':
         avenenciaoefecto = resultsemac.get()
-
 
 resultsemac = ttk.Combobox(principal, values=["Sin avenencia", "Sin efecto"], width=17)
 label_resultsemac = ttk.Label(principal, text="Resultado del SEMAC", background="#ffffff")
@@ -755,7 +662,7 @@ button = ttk.Button(principal, text="Crear Modelo", command=principal.destroy)
 
 principal.mainloop()
 
-# selección del modelo a usar en función de los botones pulsados
+# selección de la plantilla a usar en función de los botones pulsados
 
 if modelo == 1:
     template = "Plantilla Recargo de Prestaciones Desestimatoria.docx"
@@ -802,7 +709,6 @@ else:
 
 document = MailMerge(template)
 
-
 # creación de función para ver si la opción de indemnización ha sido seleccionada y rellenada, en caso contrario no hace nada
 
 def indemnizacionsiono():
@@ -811,7 +717,6 @@ def indemnizacionsiono():
     else:
         valor0 = 0
         return valor0
-
 
 # crear funcion de mayusculas y minusculas actor
 
@@ -827,7 +732,6 @@ def actorcapitalizacion():
     elif template == "Plantilla Extincion modificacion sustancial.docx":
         return str(entry_var_actor.get()).title()
 
-
 # crear funcion de mayusculas y minusculas demandado
 
 def demandadocapitalizacion():
@@ -842,10 +746,7 @@ def demandadocapitalizacion():
     elif template == "Plantilla Extincion modificacion sustancial.docx":
         return str(entry_var_demandado.get()).upper()
 
-
 # crear funcion tipo de extincion
-
-tipoextin = None
 
 if template == "Plantilla Extincion retraso pago.docx":
     tipoextin = "retraso pago"
