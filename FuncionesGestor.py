@@ -130,7 +130,6 @@ def encontrarfechacercadeunapalabra(texto, palabra):
     except:
         return None
 
-
 def encontrarfechaantiguedad(texto):
     try:
         for item in range(len(texto)):
