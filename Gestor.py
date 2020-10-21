@@ -622,6 +622,8 @@ entry_fechasemac = DateEntry(principal, textvariable=entry_var_fechasemac, date_
 label_fechasemac = ttk.Label(principal, text="Fecha celebración SEMAC", background="#ffffff")
 
 #creacion combobox para Resultado del SEMAC
+
+avenenciaoefecto = None
 def check_cboxmayorofortuito(event):
     global avenenciaoefecto
     if resultsemac.get() == 'Sin avenencia':
@@ -662,6 +664,7 @@ elif modelo == 3:
 
 # creacion de variables para el nombre del archivo
 
+# variable del sentido del fallo según la plantilla usada
 if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
     sentido = "desestim"
 elif template == "Plantilla Recargo de Prestaciones Estimacion Total.docx":
@@ -675,6 +678,7 @@ elif template == "Plantilla Extincion modificacion sustancial.docx":
 else:
     sentido = "estim parcial"
 
+# variable de la materia según la plantilla usada
 if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
     materia = "recargo prestaciones"
 elif template == "Plantilla Recargo de Prestaciones Estimacion Total.docx":
