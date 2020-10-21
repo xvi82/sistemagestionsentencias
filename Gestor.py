@@ -1,10 +1,9 @@
 from __future__ import print_function
+from mailmerge import MailMerge
 import tkinter as tk
 from tkinter import ttk, filedialog, Tk, Label, Canvas, PhotoImage
-from mailmerge import MailMerge
 from tkcalendar import DateEntry
 from datetime import date
-from Buscador import indemnizacion_despido_prueba
 from FuncionesGestor import *
 
 #fecha de hoy
@@ -499,21 +498,21 @@ cboxmayorofortuito.bind("<<ComboboxSelected>>", check_cboxmayorofortuito)
 # Espacio en blanco.
 labelx = ttk.Label(principal, text=" ", background="#ffffff").grid(row=4, column=0)
 
-# Crear caja de texto 2, nombre del actor.
+# Crear caja de texto, nombre del actor.
 entry_var_actor= tk.StringVar()
 entry_actor = ttk.Entry(principal, textvariable=entry_var_actor, justify=tk.CENTER)
 label_actor = ttk.Label(principal, text="Nombre del actor", background="#ffffff")
 if demandante:
     entry_actor.insert(0, demandante)
 
-# Crear caja de texto 3, nombre del demandado.
+# Crear caja de texto, nombre del demandado.
 entry_var_demandado = tk.StringVar()
 entry_demandado = ttk.Entry(principal, textvariable=entry_var_demandado, justify=tk.CENTER)
 label_demandado = ttk.Label(principal, text="Nombre del demandado", background="#ffffff")
 if demandado:
     entry_demandado.insert(0, demandado)
 
-# Crear caja de fecha 4, fecha de acta.
+# Crear caja de fecha, fecha de acta.
 entry_var_actainfraccion = tk.StringVar()
 entry_actainfraccion = DateEntry(principal, textvariable=entry_var_actainfraccion, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
@@ -521,7 +520,7 @@ label_actainfraccion = ttk.Label(principal, text="Fecha del Acta de Infracción"
 if actainfraccion:
     entry_actainfraccion.set_date(actainfraccion)
 
-# Crear caja de fecha 5, fecha resolucion impugnada.
+# Crear caja de fecha, fecha resolucion impugnada.
 entry_var_resolucionrecargo = tk.StringVar()
 entry_resolucionrecargo = DateEntry(principal, textvariable=entry_var_resolucionrecargo, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
@@ -529,19 +528,19 @@ label_resolucionrecargo = ttk.Label(principal, text="Fecha de la Resolución imp
 if resolucionrecargo:
     entry_resolucionrecargo.set_date(resolucionrecargo)
 
-# Crear caja de texto 15, porcentaje impuesto por la Inspección.
+# Crear caja de texto, porcentaje impuesto por la Inspección.
 entry_var_porcentajerecargo = tk.StringVar()
 entry_porcentajerecargo = ttk.Entry(principal, textvariable=entry_var_porcentajerecargo, justify=tk.CENTER)
 label_porcentajerecargo = ttk.Label(principal, text="Porcentaje impuesto por la Inspección", background="#ffffff")
 if recargo:
     entry_porcentajerecargo.insert(0, recargo)
 
-# Crear caja de texto 6, artículos infringidos.
+# Crear caja de texto, artículos infringidos.
 entry_var_articulosinfringidos = tk.StringVar()
 entry_articulosinfringidos = ttk.Entry(principal, textvariable=entry_var_articulosinfringidos, justify=tk.CENTER)
 label_articulosinfringidos = ttk.Label(principal, text="Artículos infringidos según acta de Infracción", background="#ffffff")
 
-# Crear caja de fecha 7, fecha de la reclamación previa.
+# Crear caja de fecha, fecha de la reclamación previa.
 entry_var_reclamprevia = tk.StringVar()
 entry_reclamprevia = DateEntry(principal, textvariable=entry_var_reclamprevia, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
@@ -549,7 +548,7 @@ label_reclamprevia = ttk.Label(principal, text="Fecha de la Reclamación Previa"
 if reclamacionprevia:
     entry_reclamprevia.set_date(reclamacionprevia)
 
-# Crear caja de fecha 8, fecha de la resolución de la reclamación previa.
+# Crear caja de fecha, fecha de la resolución de la reclamación previa.
 entry_var_resolreclam = tk.StringVar()
 entry_resolreclam = DateEntry(principal, textvariable=entry_var_resolreclam, date_pattern='dd/mm/Y', width=17, background='gray',
                    foreground='white', borderwidth=1)
@@ -557,46 +556,44 @@ label_resolreclam = ttk.Label(principal, text="Fecha de Resolución de la Reclam
 if resolucionreclamacion:
     entry_resolreclam.set_date(resolucionreclamacion)
 
-# Crear caja de texto 9, pruena practicada.
+# Crear caja de texto, prueba practicada.
 entry_var_prueba = tk.StringVar()
 entry_prueba = ttk.Entry(principal, textvariable=entry_var_prueba, justify=tk.CENTER)
 label_prueba = ttk.Label(principal, text="Prueba practicada aparte de la documental", background="#ffffff")
 
-# Crear caja de texto 10, en el presente caso.
+# Crear caja de texto de fundamentacion para el caso concreto y valoracion de prueba
 entry_var_presentecaso = tk.StringVar()
 entry_presentecaso = ttk.Entry(principal, textvariable=entry_var_presentecaso, justify=tk.CENTER)
 label_presentecaso = ttk.Label(principal, text="En el presente caso...", background="#ffffff")
 
-# Crear caja de texto 10, nombre del demandado.
+# Crear caja de texto de porcentaje que se impone al trabajador
 entry_var_porcentajeadecuado = tk.StringVar()
 entry_porcentajeadecuado = ttk.Entry(principal, textvariable=entry_var_porcentajeadecuado, justify=tk.CENTER)
 label_porcentajeadecuado = ttk.Label(principal, text="Porcentaje que se estima adecuado", background="#ffffff")
-# Posicionar la caja 10 en la ventana, nombre del demandado.
 
 # Crear caja de texto 10, nombre del demandado.
 entry_var_justifporcentaje = tk.StringVar()
 entry_justifporcentaje = ttk.Entry(principal, textvariable=entry_var_justifporcentaje, justify=tk.CENTER)
 label_justifporcentaje = ttk.Label(principal, text="Justificación del porcentaje que se impone", background="#ffffff")
-# Posicionar la caja 10 en la ventana, nombre del demandado.
 
-# Crear caja de texto 11, numero del procedimiento.
+# Crear caja de texto, numero del procedimiento.
 entry_var_numero = tk.StringVar()
 entry_numero = ttk.Entry(principal, textvariable=entry_var_numero, justify=tk.CENTER)
 label_numero = ttk.Label(principal, text="Número del procedimiento", background="#ffffff")
 
-# Crear caja de texto 12, año del procedimiento.
+# Crear caja de texto, año del procedimiento.
 entry_var_year = tk.StringVar()
 entry_year = ttk.Entry(principal, textvariable=entry_var_year, justify=tk.CENTER)
 label_year = ttk.Label(principal, text="Año", background="#ffffff")
 
-# Crear caja de fecha 4, fecha de acta.
+# Crear caja de¨texto de la actividad de la empresa
 entry_var_activempres = tk.StringVar()
 entry_activempres = ttk.Entry(principal, textvariable=entry_var_activempres, justify=tk.CENTER)
 label_activempres = ttk.Label(principal, text="Actividad de la Empresa", background="#ffffff")
 if actividad:
     entry_activempres.insert(0, actividad)
 
-# Crear caja de fecha 5, fecha resolucion impugnada.
+# Crear caja de fecha antigüedad del trabajador.
 entry_var_antig = tk.StringVar()
 entry_antig = DateEntry(principal, textvariable=entry_var_antig, date_pattern='dd/mm/Y', width=17, background='gray',
                     foreground='white', borderwidth=1)
@@ -604,28 +601,27 @@ label_antig = ttk.Label(principal, text="Antigüedad", background="#ffffff")
 if antig:
     entry_antig.set_date(antig)
 
-# Crear caja de texto 15, porcentaje impuesto por la Inspección.
+# Crear caja de texto, categoría profesional.
 entry_var_categoria = tk.StringVar()
 entry_categoria = ttk.Entry(principal, textvariable=entry_var_categoria, justify=tk.CENTER)
 label_categoria = ttk.Label(principal, text="Categoría Profesional", background="#ffffff")
 if categoria:
     entry_categoria.insert(0, categoria)
 
-# Crear caja de texto 6, artículos infringidos.
+# Crear caja de texto de salario diario.
 entry_var_salario = tk.StringVar()
 entry_salario = ttk.Entry(principal, textvariable=entry_var_salario, justify=tk.CENTER)
 label_salario = ttk.Label(principal, text="Salario diario", background="#ffffff")
 if salario:
     entry_salario.insert(0, salario)
 
-# Crear caja de fecha 7, fecha de la reclamación previa.
+# Crear caja de fecha, fecha de celebración del SEMAC.
 entry_var_fechasemac = tk.StringVar()
 entry_fechasemac = DateEntry(principal, textvariable=entry_var_fechasemac, date_pattern='dd/mm/Y', width=17, background='gray',
                     foreground='white', borderwidth=1)
 label_fechasemac = ttk.Label(principal, text="Fecha celebración SEMAC", background="#ffffff")
 
-avenenciaoefecto = None
-
+#creacion combobox para Resultado del SEMAC
 def check_cboxmayorofortuito(event):
     global avenenciaoefecto
     if resultsemac.get() == 'Sin avenencia':
@@ -637,11 +633,10 @@ resultsemac = ttk.Combobox(principal, values=["Sin avenencia", "Sin efecto"], wi
 label_resultsemac = ttk.Label(principal, text="Resultado del SEMAC", background="#ffffff")
 resultsemac.bind("<<ComboboxSelected>>", check_cboxmayorofortuito)
 
-# Crear caja de texto 10, nombre del demandado.
+# Crear caja de texto, desde cuando no cobra el trabajador.
 entry_var_desdecuandonocobra = tk.StringVar()
 entry_desdecuandonocobra = ttk.Entry(principal, textvariable=entry_var_desdecuandonocobra, justify=tk.CENTER)
 label_desdecuandonocobra = ttk.Label(principal, text="Desde cuando no cobra", background="#ffffff")
-# Posicionar la caja 10 en la ventana, nombre del demandado.
 
 # Posicionar boton de fin
 button = ttk.Button(principal, text="Crear Modelo", command=principal.destroy)
@@ -701,7 +696,7 @@ document = MailMerge(template)
 
 def indemnizacionsiono():
     if entry_var_salario.get():
-        return indemnizacion_despido_prueba(str(entry_var_antig.get()), str(entry_var_salario.get()), str(today))
+        return indemnizacion_despido(str(entry_var_antig.get()), str(entry_var_salario.get()), str(today))
     else:
         valor0 = 0
         return valor0
