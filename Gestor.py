@@ -3,11 +3,19 @@ from mailmerge import MailMerge
 import tkinter as tk
 from tkinter import ttk, filedialog, Tk, Label, Canvas, PhotoImage
 from tkcalendar import DateEntry
-from datetime import date
+from datetime import date, datetime
 from FuncionesGestor import *
 
 #fecha de hoy
 today = date.today()
+def current_date_format(date):
+    months = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    day = date.day
+    month = months[date.month - 1]
+    year = date.year
+    messsage = "{} de {} del {}".format(day, month, year)
+    return messsage
+now = datetime.now()
 
 #ventana de inicio
 
@@ -767,7 +775,8 @@ document.merge(
     indemnizacionextincion=indemnizacionsiono(),
     categoria=entry_var_categoria.get(),
     salariodia=entry_var_salario.get(),
-    actividadempresa=entry_var_activempres.get())
+    actividadempresa=entry_var_activempres.get(),
+    fecha=current_date_format(now))
 
 if mayorofortuito == "Fuerza Mayor":
     document.merge(fortuitomayor1="por la fuerza mayor operada al tiempo del accidente",
