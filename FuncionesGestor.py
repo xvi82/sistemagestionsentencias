@@ -3,6 +3,10 @@ from datetime import datetime
 from nltk.tokenize import word_tokenize
 import math
 import pdftotext
+import tkinter as tk
+from tkinter import ttk
+from tkcalendar import DateEntry
+
 
 def abrirpdf(pdf):
     with open(pdf, "rb") as f:
@@ -178,3 +182,17 @@ def encontrarporcentajerecargo(texto):
                 return recargo
         except:
             return None
+
+def boton_label_variable(ventana, texto):
+    entry_var = tk.StringVar()
+    entry = ttk.Entry(ventana, textvariable=entry_var, justify=tk.CENTER)
+    label = ttk.Label(ventana, text=texto, background="#ffffff")
+    return entry_var, entry, label
+
+def fecha_label_varible(ventana, texto):
+    entry_var = tk.StringVar()
+    entry = DateEntry(ventana, textvariable=entry_var, date_pattern='dd/mm/Y', width=17,
+                                     background='gray',
+                                     foreground='white', borderwidth=1)
+    label = ttk.Label(ventana, text=texto, background="#ffffff")
+    return entry_var, entry, label
