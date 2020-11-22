@@ -120,6 +120,10 @@ principal.iconbitmap("iconoaplicacionblanco.ico")
 principal.resizable(width=False, height=False)
 principal.title("Selección de Modelos Jurisdicción Social")
 
+#cambiar nombre de ventana
+def cambiar_nombre(nuevo_nombre):
+    return principal.title(nuevo_nombre)
+
 # Crear botones para elegir modelo.
 def numerodelmodelo(value):
     global modelo
@@ -158,21 +162,21 @@ def mostrarextincionmodificacion():
 
 # crear botones de seleccion de los modelos
 # boton de recargo
-botoncondena = tk.Button(principal, text="Condenatoria", command=lambda: [mostrarrecargocondena(), numerodelmodelo(1)],
+botoncondena = tk.Button(principal, text="Condenatoria", command=lambda: [mostrarrecargocondena(), numerodelmodelo(1), cambiar_nombre("Recargo de Prestaciones Condenatoria")],
                          width=20, pady=2, padx=10)
-botonabsolucion = tk.Button(principal, text="Estimatoria", command=lambda: [mostrarrecargoestim(), numerodelmodelo(2)],
+botonabsolucion = tk.Button(principal, text="Estimatoria", command=lambda: [mostrarrecargoestim(), numerodelmodelo(2), cambiar_nombre("Recargo de Prestaciones Estimatoria")],
                             width=20, pady=2, padx=10)
 botonabsolucion2 = tk.Button(principal, text="Estimatoria Parcial",
-                             command=lambda: [mostrarrecargoestimparcial(), numerodelmodelo(3)], width=20, pady=2,
+                             command=lambda: [mostrarrecargoestimparcial(), numerodelmodelo(3), cambiar_nombre("Recargo de Prestaciones Estimatoria Parcial")], width=20, pady=2,
                              padx=10)
 
 # boton de extinción
 botonretraso = tk.Button(principal, text="Retraso en el pago", width="20",
-                         command=lambda: [mostrarextincionretraso(), numerodelmodelo(4)], pady=2, padx=10)
+                         command=lambda: [mostrarextincionretraso(), numerodelmodelo(4), cambiar_nombre("Extinción del Contrato por Retraso en el pago")], pady=2, padx=10)
 botonfaltapago = tk.Button(principal, text="Falta de pago", width="20",
-                           command=lambda: [mostrarextincionfaltapago(), numerodelmodelo(5)], pady=2, padx=10)
+                           command=lambda: [mostrarextincionfaltapago(), numerodelmodelo(5), cambiar_nombre("Extinción del Contrato por Falta de Pago")], pady=2, padx=10)
 botonmodificacion = tk.Button(principal, text="Modificacion Condiciones", width="20",
-                              command=lambda: [mostrarextincionmodificacion(), numerodelmodelo(6)], pady=2, padx=10)
+                              command=lambda: [mostrarextincionmodificacion(), numerodelmodelo(6), cambiar_nombre("Extinción del Contrato por Modificacion de Condiciones")], pady=2, padx=10)
 
 # crear funciones de ocultar y mostrar los botones de seleccion de los modelos
 def mostrarrecargo():
@@ -192,9 +196,9 @@ def mostrarexincion():
     botonabsolucion2.grid_forget()
 
 # crear botones principales
-botonrecargo = tk.Button(principal, text="Recargo de Prestaciones", width="20", command=lambda: [mostrarrecargo()]).grid(
+botonrecargo = tk.Button(principal, text="Recargo de Prestaciones", width="20", command=lambda: [mostrarrecargo(), cambiar_nombre("Recargo de Prestaciones")]).grid(
     row=1, column=1, pady=4, padx=5)
-botonextinción = tk.Button(principal, text="Extinción del Contrato", width="20", command=lambda: [mostrarexincion()]).grid(
+botonextinción = tk.Button(principal, text="Extinción del Contrato", width="20", command=lambda: [mostrarexincion(), cambiar_nombre("Extinción del Contrato")]).grid(
     row=3, column=1, pady=4, padx=5)
 
 # aqui ponemos combobox de fuerza mayor o caso fortuito
