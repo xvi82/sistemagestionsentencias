@@ -1,6 +1,6 @@
 #Este es el peor código jamás escrito, ten piedad si lo revisas, soy un fucking rookie
 from __future__ import print_function
-from tkinter import ttk, filedialog, Tk, Label, Canvas, PhotoImage
+from tkinter import filedialog, Tk, Label, Canvas, PhotoImage
 from datetime import date
 from FuncionesGestor import *
 
@@ -327,43 +327,32 @@ if modelo == 1:
     template = "Plantilla Recargo de Prestaciones Desestimatoria.docx"
 elif modelo == 2:
     template = "Plantilla Recargo de Prestaciones Estimacion Total.docx"
+elif modelo == 3:
+    template = "Plantilla Recargo de Prestaciones Estimacion Parcial.docx"
 elif modelo == 4:
     template = "Plantilla Extincion retraso pago.docx"
 elif modelo == 5:
     template = "Plantilla Extincion falta de pago.docx"
 elif modelo == 6:
     template = "Plantilla Extincion modificacion sustancial.docx"
-elif modelo == 3:
-    template = "Plantilla Recargo de Prestaciones Estimacion Parcial.docx"
+
 
 # creacion de variables para el nombre del archivo
 # variable del sentido del fallo según la plantilla usada
-if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
+if "Desestimatoria" in template:
     sentido = "desestim"
-elif template == "Plantilla Recargo de Prestaciones Estimacion Total.docx":
+elif "Total" in template:
     sentido = "estim total"
-elif template == "Plantilla Extincion retraso pago.docx":
-    sentido = "estim"
-elif template == "Plantilla Extincion falta de pago.docx":
-    sentido = "estim"
-elif template == "Plantilla Extincion modificacion sustancial.docx":
-    sentido = "estim"
-else:
+elif "Parcial" in template:
     sentido = "estim parcial"
+else:
+    sentido = "estim"
 
 # variable de la materia según la plantilla usada
-if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
+if "Recargo" in template:
     materia = "recargo prestaciones"
-elif template == "Plantilla Recargo de Prestaciones Estimacion Total.docx":
-    materia = "recargo prestaciones"
-elif template == "Plantilla Extincion retraso pago.docx":
+elif "Extincion" in template:
     materia = "extincion contrato"
-elif template == "Plantilla Extincion falta de pago.docx":
-    materia = "extincion contrato"
-elif template == "Plantilla Extincion modificacion sustancial.docx":
-    materia = "extincion contrato"
-else:
-    materia = "recargo prestaciones"
 
 # uso del template elegido
 document = MailMerge(template)
@@ -377,28 +366,16 @@ def indemnizacionsiono():
 
 # crear funcion de mayusculas y minusculas actor
 def actorcapitalizacion():
-    if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
+    if "Recargo" in template:
         return str(entry_var_actor.get()).upper()
-    elif template == "Plantilla Recargo de Prestaciones Estimacion Total.docx":
-        return str(entry_var_actor.get()).upper()
-    elif template == "Plantilla Extincion retraso pago.docx":
-        return str(entry_var_actor.get()).title()
-    elif template == "Plantilla Extincion falta de pago.docx":
-        return str(entry_var_actor.get()).title()
-    elif template == "Plantilla Extincion modificacion sustancial.docx":
+    elif "Extincion" in template:
         return str(entry_var_actor.get()).title()
 
 # crear funcion de mayusculas y minusculas demandado
 def demandadocapitalizacion():
-    if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
+    if "Recargo" in template:
         return str(entry_var_demandado.get()).title()
-    elif template == "Plantilla Recargo de Prestaciones Estimacion Total.docx":
-        return str(entry_var_demandado.get()).title()
-    elif template == "Plantilla Extincion retraso pago.docx":
-        return str(entry_var_demandado.get()).upper()
-    elif template == "Plantilla Extincion falta de pago.docx":
-        return str(entry_var_demandado.get()).upper()
-    elif template == "Plantilla Extincion modificacion sustancial.docx":
+    elif "Extincion" in template:
         return str(entry_var_demandado.get()).upper()
 
 # crear funcion tipo de extincion
@@ -413,40 +390,40 @@ else:
 
 # meter todos los datos en el modelo
 document.merge(
-    actor02=actorcapitalizacion(),
-    demandado03=demandadocapitalizacion(),
-    fechaactainspeccion04=entry_var_fechaactainspeccion.get(),
-    fecharesolucionrecargo05=entry_var_fecharesolucionrecargo.get(),
-    articulosinfringidos07=str(entry_var_articulosinfringidos.get()) + " de la LPRL",
-    fechareclamacionprevia08=entry_var_fechareclamacionprevia.get(),
-    fecharesolucionreclamacionprevia09=entry_var_fecharesolucionreclamacionprevia.get(),
-    pruebaspracticadas20=" así como la " + str(entry_var_pruebaspracticadas.get()),
-    ano98=entry_var_ano.get(),
-    numero97=entry_var_numero.get(),
-    enelpresentecaso30=entry_var_enelpresentecaso.get(),
-    porcentajequeseimpone31=entry_var_porcentajequeseimpone.get(),
-    desdecuandonocobra31= entry_var_desdecuandonocobra.get(),
-    justificacionporcentaje32=entry_var_justificacionporcentaje.get(),
-    porcentajerecargo06=entry_var_porcentajerecargo.get(),
-    antiguedad05=entry_var_antiguedad.get(),
-    semac08=entry_var_fechasemac.get(),
-    indemnizacionextincion40=indemnizacionsiono(),
-    categoria06=entry_var_categoria.get(),
-    salario07=entry_var_salario.get(),
-    actividad04=entry_var_actividad.get(),
+    actor=actorcapitalizacion(),
+    demandado=demandadocapitalizacion(),
+    fechaactainspeccion=entry_var_fechaactainspeccion.get(),
+    fecharesolucionrecargo=entry_var_fecharesolucionrecargo.get(),
+    articulosinfringidos=str(entry_var_articulosinfringidos.get()) + " de la LPRL",
+    fechareclamacionprevia=entry_var_fechareclamacionprevia.get(),
+    fecharesolucionreclamacionprevia=entry_var_fecharesolucionreclamacionprevia.get(),
+    pruebaspracticadas=" así como la " + str(entry_var_pruebaspracticadas.get()),
+    ano=entry_var_ano.get(),
+    numero=entry_var_numero.get(),
+    enelpresentecaso=entry_var_enelpresentecaso.get(),
+    porcentajequeseimpone=entry_var_porcentajequeseimpone.get(),
+    desdecuandonocobra= entry_var_desdecuandonocobra.get(),
+    justificacionporcentaje=entry_var_justificacionporcentaje.get(),
+    porcentajerecargo=entry_var_porcentajerecargo.get(),
+    antiguedad=entry_var_antiguedad.get(),
+    semac=entry_var_fechasemac.get(),
+    indemnizacionextincion=indemnizacionsiono(),
+    categoria=entry_var_categoria.get(),
+    salario=entry_var_salario.get(),
+    actividad=entry_var_actividad.get(),
     fecha=current_date_format(now))
 
 if mayorofortuito == "Fuerza Mayor":
-    document.merge(fortuitomayor101="por la fuerza mayor operada al tiempo del accidente",
-                   fortuitomayor201="sino que el hecho acaecido responde a un caso de fuerza mayor, esto es, un evento extraño al círculo o ámbito de la actividad del trabajador y de la empresa, que rompe el nexo de causalidad")
+    document.merge(fortuitomayor1="por la fuerza mayor operada al tiempo del accidente",
+                   fortuitomayor2="sino que el hecho acaecido responde a un caso de fuerza mayor, esto es, un evento extraño al círculo o ámbito de la actividad del trabajador y de la empresa, que rompe el nexo de causalidad")
 else:
-    document.merge(fortuitomayor101="por su acaecimiento fortuito",
-                   fortuitomayor201="sino que el hecho acaecido responde a un caso fortuito, esto es, un hecho independiente de la voluntad del deudor de seguridad (la empresa), imprevisible e inevitable")
+    document.merge(fortuitomayor1="por su acaecimiento fortuito",
+                   fortuitomayor2="sino que el hecho acaecido responde a un caso fortuito, esto es, un hecho independiente de la voluntad del deudor de seguridad (la empresa), imprevisible e inevitable")
 
 if avenenciaoefecto == "Sin avenencia":
-    document.merge(resultsemac09="sin avenencia")
+    document.merge(resultsemac="sin avenencia")
 else:
-    document.merge(resultsemac09="sin efecto")
+    document.merge(resultsemac="sin efecto")
 
 # creación del archivo de texto
 document.write(
