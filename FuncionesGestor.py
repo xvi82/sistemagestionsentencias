@@ -6,6 +6,7 @@ import pdftotext
 import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
+from mailmerge import MailMerge
 
 
 def abrirpdf(pdf):
@@ -196,3 +197,38 @@ def fecha_label_varible(ventana, texto):
                                      foreground='white', borderwidth=1)
     label = ttk.Label(ventana, text=texto, background="#ffffff")
     return entry_var, entry, label
+
+# funcion para ocultar los label y los entries
+def ocultar(a_list):
+    for items in a_list:
+        items.grid_forget()
+
+def ocultar_multiple(a_list_of_list):
+    for lists in a_list_of_list:
+        ocultar(lists)
+
+# fecha en español
+def current_date_format(date):
+    months = ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    day = date.day
+    month = months[date.month - 1]
+    year = date.year
+    messsage = "{} de {} del {}".format(day, month, year)
+    return messsage
+
+
+#extraer los campos de la plantilla para saber el orden y el numero
+def ExtraerCamposPlantilla(nombreplantilla):
+    template = str(nombreplantilla)
+    document = MailMerge(template)
+    campos = list(document.get_merge_fields())
+    campos.sort()
+    return campos
+
+def posicion_de_label_y_entries(lista_de_entradas):
+    for i in range(len(lista_de_entradas)):
+        if i % 2 == 0:
+            lista_de_entradas[i].grid(row=10+i, column=0, pady=4)
+        else:
+            lista_de_entradas[i].grid(row=9+i, column=2, pady=4)
+
