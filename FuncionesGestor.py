@@ -8,7 +8,6 @@ from tkinter import ttk
 from tkcalendar import DateEntry
 from mailmerge import MailMerge
 
-
 def abrirpdf(pdf):
     with open(pdf, "rb") as f:
         archivo = pdftotext.PDF(f)
@@ -40,6 +39,15 @@ def buscador(texto, valor):
     else:
         raise ValueError("{} no está en {}".format(valor, texto))
 
+def convert_to_spanish_system(number):
+    number_rounded = round(number, 2)
+    number_with_commas = "{:,}".format(number_rounded)
+    string_number_splitted = str(number_with_commas).split(".")
+    string_number_splitted[0] = str(string_number_splitted[0]).split(",")
+    string_number_splitted[0] = ".".join(string_number_splitted[0])
+    string_number_splitted = ",".join(string_number_splitted)
+    return string_number_splitted
+
 def indemnizacion_despido(fecha_antiguedad, salari, fecha_despido):
     from datetime import datetime, timedelta
     fechalimite = datetime.strptime('12/02/2012', '%d/%m/%Y').date()
@@ -50,7 +58,7 @@ def indemnizacion_despido(fecha_antiguedad, salari, fecha_despido):
         dif = math.ceil(((despid - antig) / timedelta(days=1))) + 1
         daf = math.ceil(dif / 30.41666667)
         indem = daf * salario * 2.75
-        return str(indem)
+        return convert_to_spanish_system(indem)
     else:
         dif1 = math.ceil(((fechalimite - antig) / timedelta(days=1))) + 1
         daf1 = math.ceil((dif1 / 30.41666667))
@@ -59,7 +67,7 @@ def indemnizacion_despido(fecha_antiguedad, salari, fecha_despido):
         daf2 = math.ceil(dif2 / 30.41666667)
         indempost = daf2 * salario * 2.75
         indem2 = indemprev + indempost
-        return str(indem2)
+        return convert_to_spanish_system(indem2)
 
 def encontrarsalario(texto):
     salarioregex = re.compile('(\d+(\,|\.)?\d+?(\,|\.)?\d+?|\d+)')
@@ -216,7 +224,6 @@ def current_date_format(date):
     messsage = "{} de {} del {}".format(day, month, year)
     return messsage
 
-
 #extraer los campos de la plantilla para saber el orden y el numero
 def ExtraerCamposPlantilla(nombreplantilla):
     template = str(nombreplantilla)
@@ -231,4 +238,3 @@ def posicion_de_label_y_entries(lista_de_entradas):
             lista_de_entradas[i].grid(row=10+i, column=0, pady=4)
         else:
             lista_de_entradas[i].grid(row=9+i, column=2, pady=4)
-

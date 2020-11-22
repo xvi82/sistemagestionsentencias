@@ -1,9 +1,7 @@
+#Este es el peor código jamás escrito, ten piedad si lo revisas, soy un fucking rookie
 from __future__ import print_function
-from mailmerge import MailMerge
-import tkinter as tk
 from tkinter import ttk, filedialog, Tk, Label, Canvas, PhotoImage
-from tkcalendar import DateEntry
-from datetime import date, datetime
+from datetime import date
 from FuncionesGestor import *
 
 #fecha de hoy
@@ -12,7 +10,6 @@ today = date.today()
 now = datetime.now()
 
 #ventana de inicio
-
 inicio = Tk()
 inicio.geometry("400x400")
 
@@ -161,7 +158,6 @@ def mostrarextincionmodificacion():
 
 # crear botones de seleccion de los modelos
 # boton de recargo
-
 botoncondena = tk.Button(principal, text="Condenatoria", command=lambda: [mostrarrecargocondena(), numerodelmodelo(1)],
                          width=20, pady=2, padx=10)
 botonabsolucion = tk.Button(principal, text="Estimatoria", command=lambda: [mostrarrecargoestim(), numerodelmodelo(2)],
@@ -171,7 +167,6 @@ botonabsolucion2 = tk.Button(principal, text="Estimatoria Parcial",
                              padx=10)
 
 # boton de extinción
-
 botonretraso = tk.Button(principal, text="Retraso en el pago", width="20",
                          command=lambda: [mostrarextincionretraso(), numerodelmodelo(4)], pady=2, padx=10)
 botonfaltapago = tk.Button(principal, text="Falta de pago", width="20",
@@ -180,7 +175,6 @@ botonmodificacion = tk.Button(principal, text="Modificacion Condiciones", width=
                               command=lambda: [mostrarextincionmodificacion(), numerodelmodelo(6)], pady=2, padx=10)
 
 # crear funciones de ocultar y mostrar los botones de seleccion de los modelos
-
 def mostrarrecargo():
     botoncondena.grid(row=1, column=2)
     botonabsolucion.grid(row=2, column=2)
@@ -198,14 +192,12 @@ def mostrarexincion():
     botonabsolucion2.grid_forget()
 
 # crear botones principales
-
 botonrecargo = tk.Button(principal, text="Recargo de Prestaciones", width="20", command=lambda: [mostrarrecargo()]).grid(
     row=1, column=1, pady=4, padx=5)
 botonextinción = tk.Button(principal, text="Extinción del Contrato", width="20", command=lambda: [mostrarexincion()]).grid(
     row=3, column=1, pady=4, padx=5)
 
 # aqui ponemos combobox de fuerza mayor o caso fortuito
-
 mayorofortuito = None
 def check_cboxmayorofortuito(event):
     global mayorofortuito
@@ -304,7 +296,6 @@ entry_var_fechasemac, entry_fechasemac, label_fechasemac = fecha_label_varible(p
 entry_var_desdecuandonocobra, entry_desdecuandonocobra, label_desdecuandonocobra = boton_label_variable(principal, "Desde cuando no cobra")
 
 #creacion combobox para Resultado del SEMAC
-
 avenenciaoefecto = None
 def check_cboxmayorofortuito(event):
     global avenenciaoefecto
@@ -332,7 +323,6 @@ lista_extincion_modificacion = lista_extincion_retraso
 principal.mainloop()
 
 # selección de la plantilla a usar en función de los botones pulsados
-
 if modelo == 1:
     template = "Plantilla Recargo de Prestaciones Desestimatoria.docx"
 elif modelo == 2:
@@ -376,11 +366,9 @@ else:
     materia = "recargo prestaciones"
 
 # uso del template elegido
-
 document = MailMerge(template)
 
 # creación de función para ver si la opción de indemnización ha sido seleccionada y rellenada, en caso contrario no hace nada
-
 def indemnizacionsiono():
     if entry_var_salario.get():
         return indemnizacion_despido(str(entry_var_antiguedad.get()), str(entry_var_salario.get()), str(today))
@@ -388,7 +376,6 @@ def indemnizacionsiono():
         return 0
 
 # crear funcion de mayusculas y minusculas actor
-
 def actorcapitalizacion():
     if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
         return str(entry_var_actor.get()).upper()
@@ -402,7 +389,6 @@ def actorcapitalizacion():
         return str(entry_var_actor.get()).title()
 
 # crear funcion de mayusculas y minusculas demandado
-
 def demandadocapitalizacion():
     if template == "Plantilla Recargo de Prestaciones Desestimatoria.docx":
         return str(entry_var_demandado.get()).title()
@@ -416,7 +402,6 @@ def demandadocapitalizacion():
         return str(entry_var_demandado.get()).upper()
 
 # crear funcion tipo de extincion
-
 if template == "Plantilla Extincion retraso pago.docx":
     tipoextin = "retraso pago"
 elif template == "Plantilla Extincion falta de pago.docx":
@@ -427,7 +412,6 @@ else:
     tipoextin = ""
 
 # meter todos los datos en el modelo
-
 document.merge(
     actor02=actorcapitalizacion(),
     demandado03=demandadocapitalizacion(),
@@ -465,6 +449,5 @@ else:
     document.merge(resultsemac09="sin efecto")
 
 # creación del archivo de texto
-
 document.write(
     materia + " " + tipoextin + " " + entry_var_numero.get() + "-" + entry_var_ano.get() + " " + sentido + '.docx')
